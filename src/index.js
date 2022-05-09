@@ -53,5 +53,9 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`App listening on port ${PORT}`);
+  twitchClient
+    .connect()
+    .then((x) => logger.info("We are connected to chat!"))
+    .catch(console.error);
 });
