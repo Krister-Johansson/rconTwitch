@@ -1,12 +1,12 @@
 require("dotenv").config();
-const commands = require("./commands");
+const utils = require("./utils");
 const tmi = require("tmi.js");
-const util = require("minecraft-server-util");
+const mincraft = require("minecraft-server-util");
 
 const { USERNAME, PASSWORD, CHANNELS, MCRCONHOST, MCRCONPORT, MCRCONPASSWORD } =
   process.env;
 
-const client = new util.RCON();
+const client = new mincraft.RCON();
 
 const connect = async () => {
   await client.connect(MCRCONHOST, MCRCONPORT, {
@@ -15,17 +15,6 @@ const connect = async () => {
   await client.login(MCRCONPASSWORD, {
     timeout: 1000 * 5,
   });
-};
-
-const findCommandInMessage = (message) => {
-  const validCommand = message.includes("mc#");
-
-  if (!validCommand) return null;
-
-  const rawData = message.split("mc#");
-  const dataCommands = rawData.splice(1, 1)[0];
-
-  return dataCommands;
 };
 
 const twitchClient = new tmi.Client({
@@ -39,11 +28,11 @@ const twitchClient = new tmi.Client({
 
 twitchClient.on("message", async (channel, tags, message, self) => {
   if (tags.username != "streamlootsbot") return;
-  const commandData = findCommandInMessage(message);
+  const commandData = utils.findCommandInMessage(message);
 
   if (commandData === null) return;
 
-  const exicuteCommand = commands.get(commandData);
+  const exicuteCommand = utils.get(commandData);
   if (exicuteCommand === null) return;
 
   await connect();
