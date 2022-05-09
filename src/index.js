@@ -13,7 +13,7 @@ const app = express();
 const client = new mincraft.RCON();
 
 const connect = async () => {
-  await client.connect(MCRCONHOST, MCRCONPORT, {
+  await client.connect(MCRCONHOST, parseInt(MCRCONPORT), {
     timeout: 1000 * 5,
   });
   await client.login(MCRCONPASSWORD, {
