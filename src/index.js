@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const utils = require("./utils");
+const utils = require("./utils.js");
 const tmi = require("tmi.js");
 const mincraft = require("minecraft-server-util");
 
