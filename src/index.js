@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const utils = require("./utils.js");
 const tmi = require("tmi.js");
@@ -30,6 +31,7 @@ const twitchClient = new tmi.Client({
 });
 
 twitchClient.on("message", async (channel, tags, message, self) => {
+  console.log(tags.username, message);
   if (tags.username != "streamlootsbot") return;
   const commandData = utils.findCommandInMessage(message);
 
