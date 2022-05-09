@@ -1,11 +1,14 @@
 require("dotenv").config();
+const express = require("express");
 const utils = require("./utils");
 const tmi = require("tmi.js");
 const mincraft = require("minecraft-server-util");
 
 const { USERNAME, PASSWORD, CHANNELS, MCRCONHOST, MCRCONPORT, MCRCONPASSWORD } =
   process.env;
+const PORT = 8001;
 
+const app = express();
 const client = new mincraft.RCON();
 
 const connect = async () => {
@@ -41,4 +44,12 @@ twitchClient.on("message", async (channel, tags, message, self) => {
   console.log(result);
 
   await client.close();
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
