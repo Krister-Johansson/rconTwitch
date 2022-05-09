@@ -42,7 +42,7 @@ twitchClient.on("message", async (channel, tags, message, self) => {
 
   await connect();
 
-  const result = await client.execute(execute.result);
+  const result = await client.execute(exicuteCommand);
   console.log(result);
 
   await client.close();
