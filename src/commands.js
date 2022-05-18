@@ -6,7 +6,7 @@ const commands = [
   },
   {
     id: "123abc",
-    command: `execute as ${playerName} at @s run say [[message]]`,
+    command: `execute as ${playerName} at @s run say IT WORKS`,
   },
   {
     id: "abc321",

@@ -8,3 +8,6 @@ https://twitchapps.com/tmi/
 # .env
 
 Create a .env file from the example.env
+
+npm i
+npm start
